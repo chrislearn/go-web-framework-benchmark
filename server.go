@@ -30,8 +30,6 @@ import (
 	"github.com/ivpusic/neo"
 	"github.com/julienschmidt/httprouter"
 	echov3 "github.com/labstack/echo"
-	echov3fasthttp "github.com/labstack/echo/engine/fasthttp"
-	echov3standard "github.com/labstack/echo/engine/standard"
 	llog "github.com/lunny/log"
 	"github.com/lunny/tango"
 	vulcan "github.com/mailgun/route"
@@ -110,10 +108,6 @@ func main() {
 		startChi()
 	case "denco":
 		startDenco()
-	case "echov3standard":
-		startEchoV3Standard()
-	case "echov3fasthttp":
-		startEchoV3Fasthttp()
 	case "fasthttp-raw":
 		startFasthttp()
 	case "fasthttprouter":
@@ -278,18 +272,6 @@ func echov3Handler(c echov3.Context) error {
 	}
 	c.Response().Write(message)
 	return nil
-}
-func startEchoV3Standard() {
-	mux := echov3.New()
-	mux.Get("/hello", echov3Handler)
-	mux.Run(echov3standard.New(":" + strconv.Itoa(port)))
-}
-
-// echov3-fasthttp
-func startEchoV3Fasthttp() {
-	mux := echov3.New()
-	mux.Get("/hello", echov3Handler)
-	mux.Run(echov3fasthttp.New(":" + strconv.Itoa(port)))
 }
 
 //fasthttp
